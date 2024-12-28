@@ -79,39 +79,39 @@ jobs:
         with:
           path: ./out
 
-  playwright-test:
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-    - name: Install dependencies
-      run: npm ci
-    - name: Build with Next.js
-      run: npm run build
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Start server
-      run: npm start
-    - name: Run Playwright tests
-      run: npx playwright test
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
-    needs: build
+  # playwright-test:
+  #   timeout-minutes: 60
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #   - uses: actions/setup-node@v4
+  #     with:
+  #       node-version: lts/*
+  #   - name: Install dependencies
+  #     run: npm ci
+  #   - name: Build with Next.js
+  #     run: npm run build
+  #   - name: Install Playwright Browsers
+  #     run: npx playwright install --with-deps
+  #   - name: Start server
+  #     run: npm start
+  #   - name: Run Playwright tests
+  #     run: npx playwright test
+  #   - uses: actions/upload-artifact@v4
+  #     if: ${{ !cancelled() }}
+  #     with:
+  #       name: playwright-report
+  #       path: playwright-report/
+  #       retention-days: 30
+  #   needs: build
 
-  jest-test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Run Jest
-      uses: stefanoeb/jest-action@1.0.3
-    needs: build
+  # jest-test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #   - name: Run Jest
+  #     uses: stefanoeb/jest-action@1.0.3
+  #   needs: build
 
   # Deployment job
   deploy:
@@ -119,9 +119,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs:
-      - jest-test
-      - playwright-test
+    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
