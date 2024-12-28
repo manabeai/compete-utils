@@ -1,6 +1,7 @@
 // components/Factorization.tsx
 import React, { useState } from "react";
-import primeFactorization from "../../utils/primeFactorization";
+import primeFactorization from "../../../utils/primeFactorization";
+import CardFrame from "../util-card-frame";
 
 const Factorization = () => {
     const [number, setNumber] = useState<number>(0);
@@ -19,8 +20,7 @@ const Factorization = () => {
     };
 
     return (
-        <div>
-            <h2>素因数分解</h2>
+        <CardFrame title="素因数分解">
             <input
                 type="number"
                 value={number}
@@ -29,7 +29,7 @@ const Factorization = () => {
             />
             <button onClick={handleFactorize}>素因数分解</button>
             <p>素因数分解結果: {factors.length ? factors.join(", ") : "結果なし"}</p>
-        </div>
+        </CardFrame>
     );
 };
 

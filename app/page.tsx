@@ -1,8 +1,7 @@
 "use client"
 import Image from "next/image";
 import nextConfig from "../next.config"
-
-import Factorization from "./components/factorization"
+import UtilList from "./components/util-list";
 const BASE_PATH = nextConfig.basePath || "";
 
 
@@ -10,10 +9,11 @@ export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <div>
-          <h3>素因数分解</h3>
-          <Factorization />
+      <div>
+            <h1>計算ツール</h1>
+            <UtilList />
         </div>
+
         <div>
           <h3>comming soon...</h3>
         </div>
