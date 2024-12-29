@@ -90,7 +90,7 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Build with Next.js
-      run: npm run build
+      run: npx --no-install next build
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Start server
@@ -109,6 +109,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Build with Next.js
+      run: npx --no-install next build
     - name: Run Jest
       uses: stefanoeb/jest-action@1.0.3
     needs: build
