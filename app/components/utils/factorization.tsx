@@ -1,6 +1,6 @@
-// components/Factorization.tsx
 import React, { useState } from "react";
-import primeFactorization from "../../utils/primeFactorization";
+import primeFactorization from "../../../utils/primeFactorization";
+
 
 const Factorization = () => {
     const [number, setNumber] = useState<number>(0);
@@ -20,7 +20,6 @@ const Factorization = () => {
 
     return (
         <div>
-            <h2>素因数分解</h2>
             <input
                 type="number"
                 value={number}

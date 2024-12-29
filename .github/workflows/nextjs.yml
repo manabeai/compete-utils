@@ -7,7 +7,6 @@ name: Deploy Next.js site to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["master"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -79,6 +78,40 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
+
+  playwright-test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+    - name: Install dependencies
+      run: npm ci
+    - name: Build with Next.js
+      run: npx serve@latest out
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    - name: Start server
+      run: npx serve@latest out
+    - name: Run Playwright tests
+      run: npx playwright test
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
+    needs: build
+
+  jest-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run Jest
+      uses: stefanoeb/jest-action@1.0.3
+    needs: build
 
   # Deployment job
   deploy:
