@@ -1,17 +1,14 @@
 import React from "react";
-import Card from "./util-card";
-type CardFrameProps = {
+export type CardFrameProps = {
     title: string;
     children: React.ReactNode;
 };
 
-const CardFrame = ({ title, children }: CardFrameProps) => {
+export const CardFrame = ({ title, children }: CardFrameProps) => {
     return (
-        <div style={{ marginBottom: "20px" }}>
+        <div style={{ border: "1px solid #ddd", padding: "16px", margin: "16px", borderRadius: "8px" }}>
             <h3>{title}</h3>
-            <Card>{children}</Card>
+            {children}
         </div>
     );
 };
-
-export default CardFrame;

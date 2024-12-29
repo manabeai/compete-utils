@@ -1,16 +1,20 @@
-// components/UtilList.tsx
 import React from "react";
 import Factorization from "./utils/factorization";
+import { CardFrame, CardFrameProps } from "./util-card-frame";
 
-// Utilコンポーネントのリスト
-const utilComponents = [
-    { id: 1, component: <Factorization /> }
+const FactorizationProps: CardFrameProps = {
+    title: "素因数分解",
+    children: <Factorization />
+}
+
+const utilList = [
+    { id: 1, component: <CardFrame {...FactorizationProps} /> }
 ];
 
-const UtilList = () => {
+const UtilList: React.FC = () => {
     return (
         <div>
-            {utilComponents.map((util) => (
+            {utilList.map((util) => (
                 <div key={util.id}>
                     {util.component}
                 </div>
