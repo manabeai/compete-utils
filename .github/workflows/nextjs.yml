@@ -90,7 +90,7 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Build with Next.js
-      run: npx serve@latest out
+      run: npx serve@latest out -y
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Start server
@@ -113,7 +113,7 @@ jobs:
       uses: stefanoeb/jest-action@1.0.3
     needs: build
 
-  # Deployment job
+  # # Deployment job
   deploy:
     environment:
       name: github-pages
