@@ -1,20 +1,20 @@
 import React from "react";
 import Factorization from "./utils/factorization";
-import { CardFrame, CardFrameProps } from "./util-card-frame";
+import { Card, CardProps } from "./card";
 
-const FactorizationProps: CardFrameProps = {
+const FactorizationProps: CardProps = {
     title: "素因数分解",
     children: <Factorization />
 }
 
-const utilList = [
-    { id: 1, component: <CardFrame {...FactorizationProps} /> }
+const cards = [
+    { id: 1, component: <Card {...FactorizationProps} /> }
 ];
 
-const UtilList: React.FC = () => {
+const CardList: React.FC = () => {
     return (
         <div>
-            {utilList.map((util) => (
+            {cards.map((util) => (
                 <div key={util.id}>
                     {util.component}
                 </div>
@@ -23,4 +23,4 @@ const UtilList: React.FC = () => {
     );
 };
 
-export default UtilList;
+export default CardList;
